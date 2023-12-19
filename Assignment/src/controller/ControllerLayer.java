@@ -12,16 +12,16 @@ import service.ServerLayer;
 
 public class ControllerLayer {
 	
-	private ServerLayer sl=new ServerLayer();
+	private static final ServerLayer sl=new ServerLayer();
 
-	public boolean isValidName(String name) {
+	public static boolean isValidName(String name) {
 		String regex="[A-Z][a-z]+";
 		return name.matches(regex);
 	}
-	public boolean isValidPrice(Double double1) {
+	public static boolean isValidPrice(Double double1) {
 		return true;
 	}
-	public void isValidInputData(Hotel h) {
+	public static void isValidInputData(Hotel h) {
 		if(!isValidName(h.getPname())) {
 			throw new RuntimeException("Check the name entered "+h.getPname());
 		}
@@ -31,7 +31,7 @@ public class ControllerLayer {
 		
 	}
 	
-	public void addItemToMenu(Hotel h) throws ClassNotFoundException {
+	public static void addItemToMenu(Hotel h) throws ClassNotFoundException {
 		isValidInputData(h);
 		List<Hotel> existingProduct=viewWithName(h.getPname());
 		if(!existingProduct.isEmpty()) {
@@ -40,7 +40,7 @@ public class ControllerLayer {
 		addItem(h);
 		System.out.println("Item added successfully");
 	}
-	public void addItem(Hotel h) throws ClassNotFoundException {
+	public static void addItem(Hotel h) throws ClassNotFoundException {
 		try {
 			Connection c=sl.establishConnection();
 			PreparedStatement ps=c.prepareStatement("insert into hotel_menu(pname,price)values(?,?);");
@@ -53,7 +53,7 @@ public class ControllerLayer {
 		}
 	}
 	
-	public List<Hotel> viewWithName(String name) throws ClassNotFoundException {
+	public static List<Hotel> viewWithName(String name) throws ClassNotFoundException {
 		try {
 		Connection c=sl.establishConnection();
 		PreparedStatement ps=c.prepareStatement("select * from hotel_menu where pname=?;");
