@@ -73,5 +73,19 @@ public class ControllerLayer {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
+	public static void addItemInToMenu() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Product name");
+		String name=sc.next();
+		System.out.println("Enter price");
+		Double price=sc.nextDouble();
+		Hotel hotel=new Hotel(name,price);
+		try {
+			addItemToMenu(hotel);
+		} catch (ClassNotFoundException e) {
+			
+			System.out.println(e.getMessage());
+		}
+	}
 	
 }
