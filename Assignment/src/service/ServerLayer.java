@@ -18,6 +18,21 @@ public class ServerLayer {
 	
 	private ControllerLayer cl=new ControllerLayer();
 
+	public static void addItemInToMenu() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Product name");
+		String name=sc.next();
+		System.out.println("Enter price");
+		Double price=sc.nextDouble();
+		Hotel hotel=new Hotel(name,price);
+		try {
+			cl.addItemToMenu(hotel);
+		} catch (ClassNotFoundException e) {
+			
+			System.out.println(e.getMessage());
+		}
+	}
+
 	public static void viewMenu()  {
 		Connection c;
 		try {
